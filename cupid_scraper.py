@@ -1,3 +1,4 @@
+import os
 from selenium import webdriver
 
 from models import Person, initialize, ViewedPerson
@@ -42,7 +43,7 @@ def grab_match_cards(browser):
 
 def grab_match_links(match_cards):
     match_links = []
-    for card in match_cards[:12]:
+    for card in match_cards:
         name = card.find_element_by_class_name('name')
         if not ViewedPerson.select().where(
                                 ViewedPerson.name == name.text).exists():
@@ -50,7 +51,7 @@ def grab_match_links(match_cards):
             link = card.find_element_by_class_name('name').get_attribute("href")
             match_links.append(link)
 
-    print('[+] {} Match LINKS'.format(len(match_links)))
+    print('[+] Found {} Match LINKS'.format(len(match_links)))
     return match_links
 
 
@@ -59,9 +60,9 @@ def main():
     navigate_to_matches(BROWSER)
     match_cards = grab_match_cards(BROWSER)
     match_links = grab_match_links(match_cards)
-    print(match_links)
+    # print(match_links)
     BROWSER.quit()
-    print('[+] Closed Browser')
+    print('[+] Closed Browser\n')
 
     # name = card.find_element_by_class_name('name')
     # age = card.find_element_by_class_name('age')
@@ -79,5 +80,6 @@ def main():
 
 
 if __name__ == "__main__":
+    os.system('cls' if os.name == 'nt' else 'clear')
     initialize()
     main()
