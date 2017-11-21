@@ -26,7 +26,7 @@ def sign_in(browser):
 
 def navigate_to_matches(browser):
     browser.get('https://www.okcupid.com/home')
-    print('[+] Redirected to /home')
+    print('[+] Redirected to homepage')
     browse_matches = browser.find_element_by_partial_link_text(
         'Browse more matches')
     browse_matches.click()
@@ -56,27 +56,15 @@ def grab_match_links(match_cards):
 
 
 def main():
+    print('<3'*5, 'Cupid Scraper', '<3'*5)
     sign_in(BROWSER)
     navigate_to_matches(BROWSER)
     match_cards = grab_match_cards(BROWSER)
     match_links = grab_match_links(match_cards)
     # print(match_links)
     BROWSER.quit()
-    print('[+] Closed Browser\n')
-
-    # name = card.find_element_by_class_name('name')
-    # age = card.find_element_by_class_name('age')
-    # location = card.find_element_by_class_name('location')
-    # print("Name: {} \nAge: {} \nCity: {}\n".format(
-    #         name.text, age.text, location.text))
-    # try:
-    #     Person.create_person(
-    #         name=name.text,
-    #         age=int(age.text),
-    #         location=str(location.text),
-    #     )
-    # except ValueError:
-    #     pass
+    print('[+] Closed Browser')
+    print('<3'*17, '\n')
 
 
 if __name__ == "__main__":
