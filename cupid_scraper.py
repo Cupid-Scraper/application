@@ -22,15 +22,8 @@ def sign_in(browser):
     signin_button = browser.find_element_by_id('sign_in_button')
     signin_button.submit()
     print('[+] Signed In')
-
-
-def navigate_to_matches(browser):
     browser.get('https://www.okcupid.com/home')
-    print('[+] Redirected to homepage')
-    browse_matches = browser.find_element_by_partial_link_text(
-        'Browse more matches')
-    browse_matches.click()
-    print('[+] Clicked "Browse more matches"')
+    print('[+] Redirected to Homepage')
 
 
 def grab_match_cards(browser):
@@ -48,7 +41,8 @@ def grab_match_links(match_cards):
         if not ViewedPerson.select().where(
                                 ViewedPerson.name == name.text).exists():
             ViewedPerson.create_viewed_person(name.text)
-            link = card.find_element_by_class_name('name').get_attribute("href")
+            link = card.find_element_by_class_name('name')
+            link = link.get_attribute("href")
             match_links.append(link)
 
     print('[+] Found {} Matches'.format(len(match_links)))
@@ -58,10 +52,9 @@ def grab_match_links(match_cards):
 def main():
     print('<3'*5, 'CUPID SCRAPER', '<3'*5)
     sign_in(BROWSER)
-    navigate_to_matches(BROWSER)
     match_cards = grab_match_cards(BROWSER)
     match_links = grab_match_links(match_cards)
-    # print(match_links)
+    print('\n'.join(match_links))
     BROWSER.quit()
     print('[+] Closed Browser')
     print('<3'*17, '\n')
