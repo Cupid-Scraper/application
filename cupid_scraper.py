@@ -14,7 +14,7 @@ def sign_in(browser):
     signInElem = browser.find_element_by_class_name(
         'splashIndividual-header-signin-splashButton')
     signInElem.click()
-    print('[+] Clicked Sign In link')
+    print('[+] Filling in Sign In form')
     emailElem = browser.find_element_by_id('login_username')
     emailElem.send_keys(USERNAME)
     passwordElem = browser.find_element_by_id('login_password')
@@ -26,17 +26,17 @@ def sign_in(browser):
 
 def navigate_to_matches(browser):
     browser.get('https://www.okcupid.com/home')
-    print('[+] Redirected to /home')
+    print('[+] Redirected to homepage')
     browse_matches = browser.find_element_by_partial_link_text(
         'Browse more matches')
     browse_matches.click()
-    print('[+] Clicked "Browse more matched"')
+    print('[+] Clicked "Browse more matches"')
 
 
 def grab_match_cards(browser):
     browser.get('https://www.okcupid.com/match')
     browser.set_page_load_timeout(5)
-    print('[+] Grabbing Match Cards')
+    print('[+] Grabbing Matches')
     return browser.find_elements_by_class_name(
         'match_card_wrapper')
 
@@ -51,18 +51,20 @@ def grab_match_links(match_cards):
             link = card.find_element_by_class_name('name').get_attribute("href")
             match_links.append(link)
 
-    print('[+] Found {} Match LINKS'.format(len(match_links)))
+    print('[+] Found {} Matches'.format(len(match_links)))
     return match_links
 
 
 def main():
+    print('<3'*5, 'CUPID SCRAPER', '<3'*5)
     sign_in(BROWSER)
     navigate_to_matches(BROWSER)
     match_cards = grab_match_cards(BROWSER)
     match_links = grab_match_links(match_cards)
     # print(match_links)
     BROWSER.quit()
-    print('[+] Closed Browser\n')
+    print('[+] Closed Browser')
+    print('<3'*17, '\n')
 
     # name = card.find_element_by_class_name('name')
     # age = card.find_element_by_class_name('age')
