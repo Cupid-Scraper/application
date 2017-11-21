@@ -66,20 +66,6 @@ def main():
     print('[+] Closed Browser')
     print('<3'*17, '\n')
 
-    # name = card.find_element_by_class_name('name')
-    # age = card.find_element_by_class_name('age')
-    # location = card.find_element_by_class_name('location')
-    # print("Name: {} \nAge: {} \nCity: {}\n".format(
-    #         name.text, age.text, location.text))
-    # try:
-    #     Person.create_person(
-    #         name=name.text,
-    #         age=int(age.text),
-    #         location=str(location.text),
-    #     )
-    # except ValueError:
-    #     pass
-
 
 if __name__ == "__main__":
     os.system('cls' if os.name == 'nt' else 'clear')
