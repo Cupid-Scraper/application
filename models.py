@@ -12,6 +12,7 @@ class Person(Model):
     languages = CharField()
     look_for = CharField()
     answer_back = BooleanField(default=False)
+    keywords = CharField()
 
     class Meta:
         database = DATABASE
@@ -20,7 +21,7 @@ class Person(Model):
     def create_person(
             cls, name, age, location, details=None, languages=None,
             look_for=None,
-            answer_back=False,):
+            answer_back=False, keywords=None):
         """Creates People using peewee's built-in
         transaction method. If an exception occurs
         within the DATABASE.transaction() block, the transaction will
@@ -37,7 +38,8 @@ class Person(Model):
                     details=details,
                     languages=languages,
                     look_for=look_for,
-                    answer_back=answer_back
+                    answer_back=answer_back,
+                    keywords=None,
                 )
         except IntegrityError:
             raise ValueError('Person already exsists in database.')
