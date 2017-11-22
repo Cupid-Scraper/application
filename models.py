@@ -1,4 +1,4 @@
-from peewee import (CharField, IntegerField,
+from peewee import (BooleanField, CharField, IntegerField,
                     IntegrityError, Model, SqliteDatabase)
 
 DATABASE = SqliteDatabase('people.db')
@@ -8,23 +8,19 @@ class Person(Model):
     name = CharField(unique=True)
     age = IntegerField()
     location = CharField()
-    orientation = CharField()
-    height = CharField()
+    details = CharField()
     languages = CharField()
-    lookfr_sex = CharField()
-    lookfr_dist = CharField()
-    lookfr_age = CharField()
-    lookfr_dating = CharField()
+    look_for = CharField()
+    answer_back = BooleanField(default=False)
 
     class Meta:
         database = DATABASE
 
     @classmethod
     def create_person(
-            cls, name, age, location, orientation=None,
-            height=None, languages=None,
-            lookfr_sex=None, lookfr_dist=None,
-            lookfr_age=None, lookfr_dating=None):
+            cls, name, age, location, details=None, languages=None,
+            look_for=None,
+            answer_back=False,):
         """Creates People using peewee's built-in
         transaction method. If an exception occurs
         within the DATABASE.transaction() block, the transaction will
@@ -38,13 +34,10 @@ class Person(Model):
                     name=name,
                     age=age,
                     location=location,
-                    orientation=orientation,
-                    height=height,
+                    details=details,
                     languages=languages,
-                    lookfr_sex=lookfr_sex,
-                    lookfr_dist=lookfr_dist,
-                    lookfr_age=lookfr_age,
-                    lookfr_dating=lookfr_dating,
+                    look_for=look_for,
+                    answer_back=answer_back
                 )
         except IntegrityError:
             raise ValueError('Person already exsists in database.')
