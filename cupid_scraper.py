@@ -73,12 +73,12 @@ def get_profile_attrs(browser, link):
     try:
         age = browser.find_element_by_xpath(ATTR_XPATH['age']).text
     except NoSuchElementException:
-        print("[*] Did not have Age")
+        print("[*] {} did not have Age".format(username))
         age = None
     try:
         location = browser.find_element_by_xpath(ATTR_XPATH['location']).text
     except NoSuchElementException:
-        print('[*] Did not have location.')
+        print('[*] {} did not have location.'.format(username))
         location = None
     percentage = browser.find_element_by_xpath(ATTR_XPATH['percentage']).text
     details = browser.find_element_by_xpath(ATTR_XPATH['details']).text
@@ -87,7 +87,7 @@ def get_profile_attrs(browser, link):
         misc_details = browser.find_element_by_xpath(
             ATTR_XPATH['misc_details']).text
     except NoSuchElementException:
-        print("[*] Did not have Misc Details")
+        print("[*] {} did not have Misc Details".format(username))
         misc_details = None
     looking_for = browser.find_element_by_xpath(ATTR_XPATH['looking_for']).text
 
@@ -96,6 +96,25 @@ def get_profile_attrs(browser, link):
     for essay in essays:
         all_essays += essay.text
 
+    return (username, age, location, percentage,
+            details, languages, misc_details,
+            looking_for, all_essays)
+
+
+def check_keywords(attributes):
+    print('\n', '\n'.join(attributes[0:4]))
+    essays = attributes[-1]
+    matched_keywords = []
+    with open('keywords.txt') as k_file:
+        for word in k_file.readlines():
+            if word in essays or word.title() in essays or word.upper() in essays:
+                matched_keywords.append(word)
+    if not matched_keywords:
+        print('[*] Did not find any matching keywords.')
+    else:
+        print('[+] Found Keyords:')
+        print('\n'.join(matched_keywords))
+
 
 def main():
     print('<3'*5, 'CUPID SCRAPER', '<3'*5)
@@ -103,14 +122,12 @@ def main():
     match_cards = grab_match_cards(BROWSER)
     match_links = grab_match_links(match_cards)
 
-    # for link in match_links:
-    #     get_profile_attrs(BROWSER, link)
+    for link in match_links:
+        attributes = get_profile_attrs(BROWSER, link)
+        check_keywords(attributes)
 
-    get_profile_attrs(BROWSER, match_links[0])
-
-    # print('\n'.join(match_links))
     BROWSER.quit()
-    print('[+] Closed Browser')
+    print('\n[+] Closed Browser')
     print('<3'*17, '\n')
 
 
