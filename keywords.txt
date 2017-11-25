@@ -1,5 +1,4 @@
 photography
-rock
 astrophysics
 classic rock
 john williams
@@ -13,6 +12,7 @@ pool
 astronomy
 420
 liberal
+tech industry
 climate change
 global warming
 dogs
@@ -43,3 +43,42 @@ camping
 filmmaking
 outdoorsy
 futurama
+seth meyers
+artsy
+low maintenance
+laughing
+laughter
+hiking
+punctual
+responsible
+reliable
+dependable
+learner
+humble
+netflix
+stranger things
+george carlin
+west wing
+climate science
+game of thrones
+rock
+westworld
+firefly
+battleStar galactica
+rolling stones
+led zeppelin
+environmentalist
+progressive
+bob dylan
+fleetwood mac
+grateful dead
+simon & garfunkel
+washington post
+new york times
+big lebowski
+law and order
+the wire
+npr
+the doors
+bill burr
+joe rogan
