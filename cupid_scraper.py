@@ -19,10 +19,6 @@ ATTR_XPATH = {
     'background': '//*[@id="react-profile-details"]/table[2]/tbody/tr/td[2]',
     'misc_details': '//*[@id="react-profile-details"]/table[3]/tbody/tr/td[2]',
     'looking_for': '//*[@id="react-profile-wiw"]/div[2]',
-    'self_summary': '//*[@id="react-profile-essays"]/div[1]/div[2]',
-    'doin_w_life': '//*[@id="react-profile-essays"]/div[2]/div[2]',
-    'good_at': '//*[@id="react-profile-essays"]/div[3]/div[2]',
-    'favorites': '//*[@id="react-profile-essays"]/div[4]/div[2]',
 }
 
 WARNING_MESSAGE = """
