@@ -3,11 +3,12 @@ import os
 from selenium.common.exceptions import NoSuchElementException
 from selenium import webdriver
 
+import config_scraper
 from models import Person, initialize, ViewedPerson
 
+WARNING_MESSAGE = True
 BROWSER = webdriver.Firefox()
-USERNAME = 'EdwardLucifitz'
-PASSWORD = 'r2V-TZK-dX6-Dfc'
+
 
 ATTR_XPATH = {
     'username': '//*[@id="profile2015"]/div[1]/div/div[1]/div[2]/div[1]',
