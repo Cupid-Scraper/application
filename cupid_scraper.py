@@ -6,7 +6,7 @@ from selenium import webdriver
 import config_scraper
 from models import Person, initialize, ViewedPerson
 
-WARNING_MESSAGE = True
+WARNING_MESSAGE_ON = False
 BROWSER = webdriver.Firefox()
 
 
@@ -24,6 +24,24 @@ ATTR_XPATH = {
     'good_at': '//*[@id="react-profile-essays"]/div[3]/div[2]',
     'favorites': '//*[@id="react-profile-essays"]/div[4]/div[2]',
 }
+
+WARNING_MESSAGE = """
+UPON FILLING OUT 'config_scraper.py' BE WARY THAT THIS FILE NOW CONTAINS
+SENSITIVE INFORMATION ABOUT YOU, AND IT SHOULD BE PROTECTED.
+
+PRECAUTIONS TO TAKE:
+- DO NOT LEAVE YOUR COMPUTER OPEN & UNATTEDED (this should be forever & always)
+- ALWAYS REQUIRE A LOGIN TO ACCESS YOUR COMPUTER (even for sleep mode)
+- USE A UNIQUE & STRONG PASSWORD FOR YOUR COMPUTER (obviously right?)
+
+TO TURN OFF THIS WARNING CHANGE 'WARNING_MESSAGE_ON' TO 'False' INSIDE
+'cupid_scraper.py'
+PRESS 'enter' TO CONTINUE
+"""
+
+
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def sign_in(browser):
@@ -112,12 +130,18 @@ def check_keywords(attributes):
     if not matched_keywords:
         print('[*] Did not find any matching keywords.')
     else:
-        print('[+] Found Keyords:')
+        print('[+] Found Keywords:')
         print('\n'.join(matched_keywords))
 
 
 def main():
+    if WARNING_MESSAGE_ON is True:
+        print(WARNING_MESSAGE)
+        input()
+        clear()
     print('<3'*5, 'CUPID SCRAPER', '<3'*5)
+    if WARNING_MESSAGE_ON is False:
+        print('[*] WARNING MESSAGE DISABLED')
     sign_in(BROWSER)
     match_cards = grab_match_cards(BROWSER)
     match_links = grab_match_links(match_cards)
@@ -132,6 +156,6 @@ def main():
 
 
 if __name__ == "__main__":
-    os.system('cls' if os.name == 'nt' else 'clear')
+    clear()
     initialize()
     main()
