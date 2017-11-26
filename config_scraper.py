@@ -126,7 +126,7 @@ music = [
     'eric clapton', 'devo', 'thin lizzy', 'rush', 'al green', 'black sabbath',
     'bruce springsteen', 'funkadelic', 'black keys', 'the cars', 'the beatles',
     'bach', 'tom petty', 'heartbreakers', 'incredible bongo band', 'kinks',
-    'allman brothers band', 'rolling stones', 'led zeppelin',
+    'allman brothers band', 'rolling stones', 'led zeppelin', 'foghat',
     'billy joel', 'beach boys', 'boston', 'loggins & messina',
     'tom waits', 'queen', 'cheap trick', 'doobie brothers',
     'ccr', 'creedence clearwater revival',
