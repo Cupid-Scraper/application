@@ -16,14 +16,13 @@ ATTR_XPATH = {
     'location': '//*[@id="profile2015"]/div[1]/div/div[1]/div[2]/div[2]/span[3]',
     'percentage': '//*[@id="profile2015"]/div[1]/div/div[1]/div[2]/div[2]/span[5]/a',
     'details': '//*[@id="react-profile-details"]/table[1]/tbody/tr/td[2]',
-    'languages': '//*[@id="react-profile-details"]/table[2]/tbody/tr/td[2]',
+    'background': '//*[@id="react-profile-details"]/table[2]/tbody/tr/td[2]',
     'misc_details': '//*[@id="react-profile-details"]/table[3]/tbody/tr/td[2]',
     'looking_for': '//*[@id="react-profile-wiw"]/div[2]',
     'self_summary': '//*[@id="react-profile-essays"]/div[1]/div[2]',
     'doin_w_life': '//*[@id="react-profile-essays"]/div[2]/div[2]',
     'good_at': '//*[@id="react-profile-essays"]/div[3]/div[2]',
     'favorites': '//*[@id="react-profile-essays"]/div[4]/div[2]',
-
 }
 
 
@@ -35,9 +34,9 @@ def sign_in(browser):
     signInElem.click()
     print('[+] Filling in Sign In form')
     emailElem = browser.find_element_by_id('login_username')
-    emailElem.send_keys(USERNAME)
+    emailElem.send_keys(config_scraper.USERNAME)
     passwordElem = browser.find_element_by_id('login_password')
-    passwordElem.send_keys(PASSWORD)
+    passwordElem.send_keys(config_scraper.PASSWORD)
     signin_button = browser.find_element_by_id('sign_in_button')
     signin_button.submit()
     print('[+] Signed In')
@@ -83,7 +82,7 @@ def get_profile_attrs(browser, link):
         location = None
     percentage = browser.find_element_by_xpath(ATTR_XPATH['percentage']).text
     details = browser.find_element_by_xpath(ATTR_XPATH['details']).text
-    languages = browser.find_element_by_xpath(ATTR_XPATH['languages']).text
+    background = browser.find_element_by_xpath(ATTR_XPATH['background']).text
     try:
         misc_details = browser.find_element_by_xpath(
             ATTR_XPATH['misc_details']).text
@@ -98,7 +97,7 @@ def get_profile_attrs(browser, link):
         all_essays += essay.text
 
     return (username, age, location, percentage,
-            details, languages, misc_details,
+            details, background, misc_details,
             looking_for, all_essays)
 
 
