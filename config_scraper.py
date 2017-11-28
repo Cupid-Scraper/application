@@ -61,7 +61,7 @@ activities = [
     'filmmaking', 'climbing', 'coding', 'hacking', 'playing pool',
     'playing billiards', 'playing guitar', 'playing songs', 'backpacking',
     'writing music', 'photography', 'taking photographs', 'photowalks',
-    'rock climbing', 'gigging',
+    'rock climbing', 'gigging', 'ultimate frisbee',
 ]
 
 # Education - Place your schools here
@@ -111,7 +111,7 @@ comedians = [
 ]
 
 food = [
-    'pizza', 'steak', 'in n out', 'the habit'
+    'pizza', 'steak', 'in n out', 'the habit',
 ]
 
 movies = [
@@ -129,7 +129,7 @@ music = [
     'allman brothers band', 'rolling stones', 'led zeppelin', 'foghat',
     'billy joel', 'beach boys', 'boston', 'loggins & messina',
     'tom waits', 'queen', 'cheap trick', 'doobie brothers',
-    'ccr', 'creedence clearwater revival',
+    'ccr', 'creedence clearwater revival', 'willie nelson'
 ]
 
 music_genres = [
