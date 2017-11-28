@@ -84,50 +84,43 @@ def grab_match_links(match_cards):
 def get_profile_attrs(browser, link):
     browser.get(link)
     username = browser.find_element_by_xpath(ATTR_XPATH['username']).text
+
     try:
         age = browser.find_element_by_xpath(ATTR_XPATH['age']).text
     except NoSuchElementException:
         print("[*] {} did not have Age".format(username))
         age = None
+
     try:
         location = browser.find_element_by_xpath(ATTR_XPATH['location']).text
     except NoSuchElementException:
         print('[*] {} did not have location.'.format(username))
         location = None
+
     percentage = browser.find_element_by_xpath(ATTR_XPATH['percentage']).text
     details = browser.find_element_by_xpath(ATTR_XPATH['details']).text
     background = browser.find_element_by_xpath(ATTR_XPATH['background']).text
+
     try:
         misc_details = browser.find_element_by_xpath(
             ATTR_XPATH['misc_details']).text
     except NoSuchElementException:
         print("[*] {} did not have Misc Details".format(username))
         misc_details = None
+
     looking_for = browser.find_element_by_xpath(ATTR_XPATH['looking_for']).text
 
-    essays = browser.find_elements_by_id('react-profile-essays')
-    all_essays = ''
-    for essay in essays:
-        all_essays += essay.text
+    essay_titles = browser.find_elements_by_class_name("essays2015-essay-title")
+    essays = browser.find_elements_by_class_name("essays2015-essay-content")
+    essay_list = zip(essay_titles, essays)
+
+    # for title, essay in essay_list:
+    #     print(title.text)
+    #     print(essay.text, '\n\n')
 
     return (username, age, location, percentage,
             details, background, misc_details,
-            looking_for, all_essays)
-
-
-def check_keywords(attributes):
-    print('\n', '\n'.join(attributes[0:4]))
-    essays = attributes[-1]
-    matched_keywords = []
-    with open('keywords.txt') as k_file:
-        for word in k_file.readlines():
-            if word in essays or word.title() in essays or word.upper() in essays:
-                matched_keywords.append(word)
-    if not matched_keywords:
-        print('[*] Did not find any matching keywords.')
-    else:
-        print('[+] Found Keywords:')
-        print('\n'.join(matched_keywords))
+            looking_for, essay_list)
 
 
 def main():
@@ -142,9 +135,11 @@ def main():
     match_cards = grab_match_cards(BROWSER)
     match_links = grab_match_links(match_cards)
 
-    for link in match_links:
-        attributes = get_profile_attrs(BROWSER, link)
-        check_keywords(attributes)
+    # for link in match_links:
+    #     attributes = get_profile_attrs(BROWSER, link)
+        
+    attributes = get_profile_attrs(BROWSER, match_links[0])
+    
 
     BROWSER.quit()
     print('\n[+] Closed Browser')
