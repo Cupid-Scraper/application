@@ -1,6 +1,7 @@
 import os
 
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import (NoSuchElementException,
+                                        WebDriverException)
 from selenium import webdriver
 
 import config_scraper
@@ -11,15 +12,36 @@ BROWSER = webdriver.Firefox()
 
 
 ATTR_XPATH = {
-    'username': '//*[@id="profile2015"]/div[1]/div/div[1]/div[2]/div[1]',
-    'age': '//*[@id="profile2015"]/div[1]/div/div[1]/div[2]/div[2]/span[1]',
-    'location': '//*[@id="profile2015"]/div[1]/div/div[1]/div[2]/div[2]/span[3]',
-    'percentage': '//*[@id="profile2015"]/div[1]/div/div[1]/div[2]/div[2]/span[5]/a',
-    'details': '//*[@id="react-profile-details"]/table[1]/tbody/tr/td[2]',
-    'background': '//*[@id="react-profile-details"]/table[2]/tbody/tr/td[2]',
-    'misc_details': '//*[@id="react-profile-details"]/table[3]/tbody/tr/td[2]',
-    'looking_for': '//*[@id="react-profile-wiw"]/div[2]',
+    'username':
+    '//*[@id="profile2015"]/div[1]/div/div[1]/div[2]/div[1]',
+    'age':
+    '//*[@id="profile2015"]/div[1]/div/div[1]/div[2]/div[2]/span[1]',
+    'location':
+    '//*[@id="profile2015"]/div[1]/div/div[1]/div[2]/div[2]/span[3]',
+    'percentage':
+    '//*[@id="profile2015"]/div[1]/div/div[1]/div[2]/div[2]/span[5]/a',
+    'basics':
+    '//*[@id="react-profile-details"]/table[1]/tbody/tr/td[2]',
+    'background':
+    '//*[@id="react-profile-details"]/table[2]/tbody/tr/td[2]',
+    'misc_details':
+    '//*[@id="react-profile-details"]/table[3]/tbody/tr/td[2]',
+    'looking_for':
+    '//*[@id="react-profile-wiw"]/div[2]',
 }
+
+config_lists = [
+    config_scraper.activities, config_scraper.education,
+    config_scraper.topics_interest, config_scraper.politics,
+    config_scraper.adjectives, config_scraper.no_way,
+    config_scraper.authors, config_scraper.books,
+    config_scraper.comedians, config_scraper.food,
+    config_scraper.directors, config_scraper.movies,
+    config_scraper.music, config_scraper.music_genres,
+    config_scraper.news_mags, config_scraper.radio,
+    config_scraper.television, config_scraper.youtube,
+    config_scraper.your_six_things, config_scraper.your_thoughts
+]
 
 WARNING_MESSAGE = """
 UPON FILLING OUT 'config_scraper.py' BE WARY THAT THIS FILE NOW CONTAINS
@@ -82,7 +104,10 @@ def grab_match_links(match_cards):
 
 
 def get_profile_attrs(browser, link):
-    browser.get(link)
+    try:
+        browser.get(link)
+    except WebDriverException:
+        print("[-] WebDriver Error: 'url' not string")
     username = browser.find_element_by_xpath(ATTR_XPATH['username']).text
 
     try:
@@ -98,7 +123,7 @@ def get_profile_attrs(browser, link):
         location = None
 
     percentage = browser.find_element_by_xpath(ATTR_XPATH['percentage']).text
-    details = browser.find_element_by_xpath(ATTR_XPATH['details']).text
+    basics = browser.find_element_by_xpath(ATTR_XPATH['basics']).text
     background = browser.find_element_by_xpath(ATTR_XPATH['background']).text
 
     try:
@@ -110,7 +135,8 @@ def get_profile_attrs(browser, link):
 
     looking_for = browser.find_element_by_xpath(ATTR_XPATH['looking_for']).text
 
-    essay_titles = browser.find_elements_by_class_name("essays2015-essay-title")
+    essay_titles = browser.find_elements_by_class_name(
+        "essays2015-essay-title")
     essays = browser.find_elements_by_class_name("essays2015-essay-content")
     essay_list = zip(essay_titles, essays)
 
@@ -119,8 +145,113 @@ def get_profile_attrs(browser, link):
     #     print(essay.text, '\n\n')
 
     return (username, age, location, percentage,
-            details, background, misc_details,
-            looking_for, essay_list)
+            basics, background, misc_details,
+            looking_for, essay_list, link)
+
+
+def parse_profile_attrs(attributes):
+    print('\n')
+    print(attributes[0])
+
+    check_age(attributes[1], config_scraper.age_range)
+    check_location(attributes[2], config_scraper.locations)
+    check_percentage(attributes[3], config_scraper.percentage)
+    check_basics(
+        attributes[4],
+        config_scraper.basics_wanted,
+        config_scraper.basics_not_wanted,
+    )
+    check_background(
+        attributes[5],
+        config_scraper.background_wanted,
+        config_scraper.background_not_wanted
+    )
+    check_misc_details(
+        attributes[6],
+        config_scraper.misc_details_wanted,
+        config_scraper.misc_details_not_wanted
+    )
+
+    # check_self_summary()
+
+
+def check_age(age, age_range):
+    low, high = age_range
+    if not low:
+        low = float("inf")
+    if not high:
+        high = float("inf")
+    if int(age) >= low and int(age) <= high:
+        print('[+] Matched Age Range: {}'.format(age))
+
+
+def check_location(location, location_list):
+    if location.strip() in location_list:
+        print('[+] Matched City: {}'.format(location))
+
+
+def check_percentage(match_percentage, pref_percent):
+    match_percentage = match_percentage.split('%')
+    if int(match_percentage[0]) >= pref_percent:
+        print(
+            "[+] Matched Percentage Range: {}%".format(
+                match_percentage[0]))
+
+
+def check_basics(basics, basics_wanted, basics_not_wanted):
+    basics = basics.split(', ')
+    matched_wanted_basics = []
+    matched_unwanted_basics = []
+    for detail in basics:
+        if detail.strip() in basics_wanted:
+            matched_wanted_basics.append(detail)
+        if detail.strip() in basics_not_wanted:
+            matched_unwanted_basics.append(detail)
+
+    if matched_wanted_basics:
+        print('[+] Matched Wanted basics: {}'.format(', '.join(
+            matched_wanted_basics)))
+    if matched_unwanted_basics:
+        print('[-] Matched Unwanted basics: {}'.format(', '.join(
+            matched_unwanted_basics)))
+
+
+def check_background(background, background_wanted, background_not_wanted):
+    background = background.split(', ')
+    matched_wanted_background = []
+    matched_unwanted_background = []
+    for detail in background:
+        if detail.strip() in background_wanted:
+            matched_wanted_background.append(detail)
+        if detail.strip() in background_not_wanted:
+            matched_unwanted_background.append(detail)
+
+    if matched_wanted_background:
+        print('[+] Matched Wanted background: {}'.format(', '.join(
+            matched_wanted_background)))
+    if matched_unwanted_background:
+        print('[-] Matched Unwanted background: {}'.format(', '.join(
+            matched_unwanted_background)))
+
+
+def check_misc_details(misc_details,
+                       misc_details_wanted,
+                       misc_details_not_wanted):
+    misc_details = misc_details.split(', ')
+    matched_wanted_misc_details = []
+    matched_unwanted_misc_details = []
+    for detail in misc_details:
+        if detail.strip() in misc_details_wanted:
+            matched_wanted_misc_details.append(detail)
+        if detail.strip() in misc_details_not_wanted:
+            matched_unwanted_misc_details.append(detail)
+
+    if matched_wanted_misc_details:
+        print('[+] Matched Wanted Misc Details: {}'.format(', '.join(
+            matched_wanted_misc_details)))
+    if matched_unwanted_misc_details:
+        print('[-] Matched Unwanted Misc Details: {}'.format(', '.join(
+            matched_unwanted_misc_details)))
 
 
 def main():
@@ -137,9 +268,9 @@ def main():
 
     # for link in match_links:
     #     attributes = get_profile_attrs(BROWSER, link)
-        
+
     attributes = get_profile_attrs(BROWSER, match_links[0])
-    
+    parse_profile_attrs(attributes)
 
     BROWSER.quit()
     print('\n[+] Closed Browser')
