@@ -34,7 +34,7 @@ percentage = 80
 
 # Details
 basics_wanted = [
-    'Woman', 'Single', 'Thin', 'Fit', 'Jacked'
+    'Thin', 'Fit', 'Jacked'
 ]
 
 # Details Not Wanted
@@ -52,7 +52,7 @@ background_wanted = [
     'Jewish (and laughing about it)', 'Sikh (and laughing about it)',
     'Other religion (and laughing about it)',
     "Christian (but it's not important)", "Catholic (but it's not important)",
-    "Muslim (but it's not important)", "Buddhist (but it's not important)",
+    "Muslim (but it's not important)", "Buddhist (but it’s not important)",
     "Hindu (but it's not important)", "Jewish (but it's not important)",
     "Sikh (but it's not important)",
     "Other religion (but it's not important)", 'Attended Two-year college',
@@ -70,7 +70,9 @@ background_not_wanted = [
     'Hindu (and it’s important)', 'Jewish (and it’s important)',
     'Sikh (and it’s important)',
     'Other religion (and it’s important)', 'Dropped out of University',
+    'Christian (and very serious about it)',
 ]
+# Didn't Catch:
 
 
 # Mics Details
@@ -99,12 +101,12 @@ activities = [
     'filmmaking', 'climbing', 'coding', 'hacking', 'playing pool',
     'playing billiards', 'playing guitar', 'playing songs', 'backpacking',
     'writing music', 'photography', 'taking photographs', 'photowalks',
-    'rock climbing', 'gigging', 'ultimate frisbee',
+    'rock climbing', 'gigging', 'ultimate frisbee', 'biking', 'writing',
 ]
 
 # Education - Place your schools here
 education = [
-    'uc berkeley', 'ucb'
+    'uc berkeley', 'ucb', 'UC Berkeley', 'Berkeley'
 ]
 
 # topics of interest to you
@@ -122,7 +124,9 @@ politics = [
 adjectives = [
     'artsy', 'punctual', 'responsible', 'reliable', 'dependable',
     'learner', 'humble', 'low maintenance', 'environmentalist',
-    'musician', 'pianist', 'hilarious', 'engineer'
+    'musician', 'pianist', 'hilarious',
+    'engineer', 'nerdy', 'old soul', 'goofy',
+    'good listener'
 ]
 
 # Absolutely Not - Matches that have these words in their essays will
@@ -140,20 +144,24 @@ authors = [
 ]
 
 books = [
-    'for dummies', "ender's game", "ender's shadow",
+    'for dummies', "ender's game", "ender's shadow", 'fantasy', 'sci-if',
 ]
 
 comedians = [
     'bill burr', 'chad daniels', 'george carlin', 'joe rogan',
-    'jim gaffigan', 'lewis black', 'mike birbiglia'
+    'jim gaffigan', 'lewis black', 'mike birbiglia', 'mitch hedberg',
+    'joey diaz', 'ari shafir', 'bert kreischer', 'trevor noah'
+
 ]
 
 food = [
-    'pizza', 'steak', 'in n out', 'the habit',
+    'pizza', 'steak', 'in n out', 'the habit', "reese's",
+    'chocolate', 'peanut butter'
 ]
 
 directors = [
-    'hayao miyazaki', 'quentin tarantino', 'christopher nolan', 'ridley scott', 'martin scorsese', 'coen brothers', 
+    'hayao miyazaki', 'quentin tarantino', 'christopher nolan', 'ridley scott',
+    'martin scorsese', 'coen brothers', 
 ]
 
 actors = [
@@ -163,7 +171,10 @@ movies = [
     'spirited away', 'big lebowski', 'carlitos way', 'goodfellas',
     'scarface', 'pulp fiction', 'kill bill', 'holy grail',
     'my neighbor totoro', 'howls moving castle', 'lord of the rings',
-    'shawshank redemption', 
+    'shawshank redemption', 'interstellar', 'dr. strangelove',
+    'good will hunting', 'a beautiful mind', 'truman', 'fight club', 
+    'star wars', 'LOTR', 'Lord of the Rings', 'The Count of Monte Cristo',
+    'illusionist', 'the nightmare before christmas', 'edward scissorhands'
 ]
 
 # This should just be musical artists.
@@ -171,14 +182,15 @@ music = [
     'fleetwood mac', 'bob dylan', 'the clash', 'the doors', 'supertramp',
     'john williams', 'grateful dead', 'herbie hancock', 'miles davis',
     'eric clapton', 'devo', 'thin lizzy', 'rush', 'al green', 'black sabbath',
-    'bruce springsteen', 'funkadelic', 'black keys', 'the cars', 'the beatles',
+    'bruce springsteen', 'funkadelic', 'black keys', 'the cars', 'beatles',
     'bach', 'tom petty', 'heartbreakers', 'incredible bongo band', 'kinks',
     'allman brothers band', 'rolling stones', 'led zeppelin', 'foghat',
     'billy joel', 'beach boys', 'boston', 'loggins & messina',
     'tom waits', 'queen', 'cheap trick', 'doobie brothers',
     'ccr', 'creedence clearwater revival', 'willie nelson', 'rjd2', 'u2',
     'david bowie', 'joni mitchell', 'dave brubeck', 'howard shore', 
-    'danny elfman',
+    'danny elfman', 'first aid kit', 'glenn miller orchestra',
+    'louis armstrong', 
 
 ]
 
@@ -201,7 +213,10 @@ television = [
     'x-files', 'westworld', 'stranger things', 'fraiser', 'dick van dyke show',
     'battlestar galactica', 'firefly', 'bill maher', 'real time',
     'john oliver', 'last week tonight', 'seth meyers', 'futurama',
-    'west wing', 'game of thrones', 'law and order', 'the wire', 'monty python', 'better call saul', 'sens8', 'the crown', 
+    'west wing', 'game of thrones', 'law and order', 'the wire', 
+    'monty python', 'better call saul', 'sens8', 'the crown',
+    'dexter', 'newsroom', 'breaking bad', 'scrubs', 'daily show', 'star trek',
+    'Law & Order SVU', 'Game of Thrones'
 ]
 
 youtube = [
@@ -212,14 +227,24 @@ youtube = [
 
 # SIX THINGS YOU COULD NEVER LIVE WITHOUT
 your_six_things = [
-
+    'dslr', 
 ]
 
 # YOU SPEND A LOT OF TIME THINK ABOUT
 your_thoughts = [
-    'climate science', 'global warming',
+    'climate science', 'global warming', 'environmental issues'
 ]
 
 doin_w_life = [
-    'scientist',
+    'scientist', 'writer', 'designer', 'learning to code', 
+    'learning to program', 'programming',
+    'software engineer',
+]
+
+general_words = [
+     'flux capacitor', 'inappropriate jokes',
+     'intelligent conversation', 'cats', 'science', 'learning',
+     'dry humor', 'code', 'emotional intelligence', 'studio ghibli',
+     'stand-up', 'comedy', 'PhD', 'film'
+
 ]
