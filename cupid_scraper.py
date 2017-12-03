@@ -107,7 +107,8 @@ def grab_match_links(match_cards):
         link = link.get_attribute("href")
         match_links.append(link)
 
-    print('[+] Found {} Matches'.format(len(match_links)))
+    # print('[+] Found {} Matches'.format(len(match_links)))
+    # input('\nPress ENTER to begin Searching')
     return match_links
 
 
@@ -116,7 +117,12 @@ def get_profile_attrs(browser, link):
         browser.get(link)
     except WebDriverException:
         print("[-] WebDriver Error: 'url' not string")
-    username = browser.find_element_by_xpath(ATTR_XPATH['username']).text
+    
+    try:
+        username = browser.find_element_by_xpath(ATTR_XPATH['username']).text
+    except NoSuchElementException:
+        print('Did not scrape HTML properly.')
+        exit
 
     try:
         age = browser.find_element_by_xpath(ATTR_XPATH['age']).text
@@ -154,8 +160,7 @@ def get_profile_attrs(browser, link):
 
 
 def parse_profile_attrs(attributes):
-    print('\n')
-    print('USERNAME: {}.'.format(attributes[0]))
+    print('\nUSERNAME: {}.'.format(attributes[0]))
     print('WEB ADDRESS: {}'.format(attributes[-1]))
 
     check_age(attributes[1], config_scraper.age_range)
@@ -282,6 +287,7 @@ def check_essays(essays):
                                                 lst_name.upper()))
                 for value in values_present:
                     print('   {}'.format(value))
+                counter += 1
 
 
 def main():
@@ -297,16 +303,18 @@ def main():
     match_cards = grab_match_cards(BROWSER)
     match_links = grab_match_links(match_cards)
 
-    counter = 0
+    counter = 1
     for link in match_links[:4]:
-        if counter > 0:
-            input('\n***** Press ENTER to search next match *****\n\n')
+        clear()
+        print('<3'*5, 'CUPID SCRAPER', '<3'*5)
         attributes = get_profile_attrs(BROWSER, link)
         parse_profile_attrs(attributes)
         counter += 1
-    
-    # BROWSER.quit()
-    print('\n[+] Closed Browser')
+        if counter != 5:
+            input('\n<3<3<3 Press ENTER to search next match <3<3<3 ')
+
+    input('\n<3<3<3 Press ENTER to close browser <3<3<3 ')
+    BROWSER.quit()
     print('<3'*17, '\n')
 
 
