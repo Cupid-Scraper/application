@@ -55,7 +55,7 @@ background_wanted = [
     "Muslim (but it's not important)", "Buddhist (but it’s not important)",
     "Hindu (but it's not important)", "Jewish (but it's not important)",
     "Sikh (but it's not important)",
-    "Other religion (but it's not important)", 'Attended Two-year college',
+    "Other religion (but it’s not important)", 'Attended Two-year college',
     'Attended Space camp', 'Atheist (and laughing about it)',
     'Agnostic (and laughing about it)', "Atheist (but it's not important)",
     "Agnostic (but it's not important)", 'Working on Space camp',
@@ -70,9 +70,8 @@ background_not_wanted = [
     'Hindu (and it’s important)', 'Jewish (and it’s important)',
     'Sikh (and it’s important)',
     'Other religion (and it’s important)', 'Dropped out of University',
-    'Christian (and very serious about it)',
+    'Christian (and very serious about it)', 'Other religon'
 ]
-# Didn't Catch:
 
 
 # Mics Details
@@ -145,6 +144,7 @@ authors = [
 
 books = [
     'for dummies', "ender's game", "ender's shadow", 'fantasy', 'sci-if',
+    "Ender's Game",
 ]
 
 comedians = [
@@ -174,7 +174,8 @@ movies = [
     'shawshank redemption', 'interstellar', 'dr. strangelove',
     'good will hunting', 'a beautiful mind', 'truman', 'fight club', 
     'star wars', 'LOTR', 'Lord of the Rings', 'The Count of Monte Cristo',
-    'illusionist', 'the nightmare before christmas', 'edward scissorhands'
+    'illusionist', 'the nightmare before christmas', 'edward scissorhands',
+    'zombieland', 'slumdog millionaire', 'donnie darko'
 ]
 
 # This should just be musical artists.
@@ -216,7 +217,7 @@ television = [
     'west wing', 'game of thrones', 'law and order', 'the wire', 
     'monty python', 'better call saul', 'sens8', 'the crown',
     'dexter', 'newsroom', 'breaking bad', 'scrubs', 'daily show', 'star trek',
-    'Law & Order SVU', 'Game of Thrones'
+    'Law & Order SVU', 'Game of Thrones', 'House',
 ]
 
 youtube = [
