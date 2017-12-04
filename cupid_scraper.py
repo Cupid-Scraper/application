@@ -7,7 +7,7 @@ from selenium import webdriver
 import my_config_scraper
 # from models import Person, initialize,
 
-WARNING_MESSAGE_ON = False
+WARNING_MESSAGE_ON = True
 BROWSER = webdriver.Firefox()
 
 
