@@ -4,7 +4,8 @@ from selenium.common.exceptions import (NoSuchElementException,
                                         WebDriverException)
 from selenium import webdriver
 
-import config_scraper
+import my_config_scraper
+# import test_config_scraper
 # from models import Person, initialize,
 
 WARNING_MESSAGE_ON = False
@@ -31,32 +32,32 @@ ATTR_XPATH = {
 }
 
 config_lists = {
-    'activities': config_scraper.activities,
-    'education': config_scraper.education,
-    'topics_interest': config_scraper.topics_interest,
-    'politics': config_scraper.politics,
-    'adjectives': config_scraper.adjectives,
-    'no_way': config_scraper.no_way,
-    'authors': config_scraper.authors,
-    'books': config_scraper.books,
-    'comedians': config_scraper.comedians,
-    'food': config_scraper.food,
-    'directors': config_scraper.directors,
-    'movies': config_scraper.movies,
-    'music': config_scraper.music,
-    'music_genres': config_scraper.music_genres,
-    'news_mags': config_scraper.news_mags,
-    'radio': config_scraper.radio,
-    'television': config_scraper.television,
-    'youtube': config_scraper.youtube,
-    'your_six_things': config_scraper.your_six_things,
-    'your_thoughts': config_scraper.your_thoughts,
+    'activities': my_config_scraper.activities,
+    'education': my_config_scraper.education,
+    'topics_interest': my_config_scraper.topics_interest,
+    'politics': my_config_scraper.politics,
+    'adjectives': my_config_scraper.adjectives,
+    'no_way': my_config_scraper.no_way,
+    'authors': my_config_scraper.authors,
+    'books': my_config_scraper.books,
+    'comedians': my_config_scraper.comedians,
+    'food': my_config_scraper.food,
+    'directors': my_config_scraper.directors,
+    'movies': my_config_scraper.movies,
+    'music': my_config_scraper.music,
+    'music_genres': my_config_scraper.music_genres,
+    'news_mags': my_config_scraper.news_mags,
+    'radio': my_config_scraper.radio,
+    'television': my_config_scraper.television,
+    'youtube': my_config_scraper.youtube,
+    'your_six_things': my_config_scraper.your_six_things,
+    'your_thoughts': my_config_scraper.your_thoughts,
     'general_words':
-    config_scraper.general_words,
+    my_config_scraper.general_words,
 }
 
 WARNING_MESSAGE = """
-UPON FILLING OUT 'config_scraper.py' BE WARY THAT THIS FILE NOW CONTAINS
+UPON FILLING OUT 'my_config_scraper.py' BE WARY THAT THIS FILE NOW CONTAINS
 SENSITIVE INFORMATION ABOUT YOU, AND IT SHOULD BE PROTECTED.
 
 PRECAUTIONS TO TAKE:
@@ -82,9 +83,9 @@ def sign_in(browser):
     signInElem.click()
     print('[+] Filling in Sign In form')
     emailElem = browser.find_element_by_id('login_username')
-    emailElem.send_keys(config_scraper.USERNAME)
+    emailElem.send_keys(my_config_scraper.USERNAME)
     passwordElem = browser.find_element_by_id('login_password')
-    passwordElem.send_keys(config_scraper.PASSWORD)
+    passwordElem.send_keys(my_config_scraper.PASSWORD)
     signin_button = browser.find_element_by_id('sign_in_button')
     signin_button.submit()
     print('[+] Signed In')
@@ -117,7 +118,7 @@ def get_profile_attrs(browser, link):
         browser.get(link)
     except WebDriverException:
         print("[-] WebDriver Error: 'url' not string")
-    
+
     try:
         username = browser.find_element_by_xpath(ATTR_XPATH['username']).text
     except NoSuchElementException:
@@ -161,25 +162,26 @@ def get_profile_attrs(browser, link):
 
 def parse_profile_attrs(attributes):
     print('\nUSERNAME: {}.'.format(attributes[0]))
-    print('WEB ADDRESS: {}'.format(attributes[-1]))
 
-    check_age(attributes[1], config_scraper.age_range)
-    check_location(attributes[2], config_scraper.locations)
-    check_percentage(attributes[3], config_scraper.percentage)
+    check_age(attributes[1], my_config_scraper.age_range)
+    check_location(attributes[2], my_config_scraper.locations)
+    check_percentage(attributes[3], my_config_scraper.percentage)
+
+    # MAKE THE NEXT THREE FUNCTIONS INTO ONE FUNCTION, AND SWITCH TO ANOTHER BRANCH
     check_basics(
         attributes[4],
-        config_scraper.basics_wanted,
-        config_scraper.basics_not_wanted,
+        my_config_scraper.basics_wanted,
+        my_config_scraper.basics_not_wanted,
     )
     check_background(
         attributes[5],
-        config_scraper.background_wanted,
-        config_scraper.background_not_wanted
+        my_config_scraper.background_wanted,
+        my_config_scraper.background_not_wanted
     )
     check_misc_details(
         attributes[6],
-        config_scraper.misc_details_wanted,
-        config_scraper.misc_details_not_wanted
+        my_config_scraper.misc_details_wanted,
+        my_config_scraper.misc_details_not_wanted
     )
     check_essays(
         attributes[8]
@@ -268,7 +270,8 @@ def check_misc_details(misc_details, misc_details_wanted,
 
 
 def check_essays(essays):
-    print("\nChecking essays against 'config_scraper'...\n")
+    # ADD THREADING FOR LISTS
+    print("\nChecking essays against 'my_config_scraper'...\n")
     for essay_name, essay_paragraph in essays:
         counter = 0
         for lst_name, values in config_lists.items():
@@ -282,7 +285,7 @@ def check_essays(essays):
                     values_present.append(item)
             if values_present:
                 if counter == 0:
-                    print('\n> > > {}'.format(essay_name.text)) 
+                    print('\n> > > {}'.format(essay_name.text))
                 print('[+] Matched Items in {} list:'.format(
                                                 lst_name.upper()))
                 for value in values_present:
