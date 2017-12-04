@@ -5,7 +5,6 @@ from selenium.common.exceptions import (NoSuchElementException,
 from selenium import webdriver
 
 import my_config_scraper
-# import test_config_scraper
 # from models import Person, initialize,
 
 WARNING_MESSAGE_ON = False
