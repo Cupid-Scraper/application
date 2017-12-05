@@ -308,7 +308,7 @@ def main():
     counter = 1
     for link in match_links[:4]:
         clear()
-        print('<3'*5, 'CUPID SCRAPER', '<3'*5)
+        print('<3'*7, 'CUPID SCRAPER', '<3'*7)
         attributes = get_profile_attrs(BROWSER, link)
         parse_profile_attrs(attributes)
         counter += 1
@@ -317,7 +317,7 @@ def main():
 
     input('\n<3<3<3 Press ENTER to close browser <3<3<3 ')
     BROWSER.quit()
-    print('<3'*17, '\n')
+    print('<3'*21, '\n')
 
 
 if __name__ == "__main__":
