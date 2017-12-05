@@ -216,7 +216,6 @@ def check_percentage(match_percentage, pref_percent):
 
 def check_profile_details(section_name, section, wanted_list, not_wanted_list):
     section = section.split(', ')
-    print(section)
     matched_wanted_list = []
     matched_unwanted_list = []
     for detail in section:
