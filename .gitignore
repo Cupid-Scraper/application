@@ -1,0 +1,6 @@
+cupid_env
+snippets.txt
+geckodriver.log
+my_config_scraper.py
+__pycache__/
+.vscode/
