@@ -165,19 +165,20 @@ def parse_profile_attrs(attributes):
     check_age(attributes[1], my_config_scraper.age_range)
     check_location(attributes[2], my_config_scraper.locations)
     check_percentage(attributes[3], my_config_scraper.percentage)
-
-    # MAKE THE NEXT THREE FUNCTIONS INTO ONE FUNCTION, AND SWITCH TO ANOTHER BRANCH
-    check_basics(
+    check_profile_details(
+        'Details',
         attributes[4],
         my_config_scraper.basics_wanted,
         my_config_scraper.basics_not_wanted,
     )
-    check_background(
+    check_profile_details(
+        'Background',
         attributes[5],
         my_config_scraper.background_wanted,
         my_config_scraper.background_not_wanted
     )
-    check_misc_details(
+    check_profile_details(
+        'Misc Details',
         attributes[6],
         my_config_scraper.misc_details_wanted,
         my_config_scraper.misc_details_not_wanted
@@ -213,59 +214,23 @@ def check_percentage(match_percentage, pref_percent):
             match_percentage[0]))
 
 
-def check_basics(basics, basics_wanted, basics_not_wanted):
-    basics = basics.split(', ')
-    matched_wanted_basics = []
-    matched_unwanted_basics = []
-    for detail in basics:
-        if detail.strip() in basics_wanted:
-            matched_wanted_basics.append(detail)
-        if detail.strip() in basics_not_wanted:
-            matched_unwanted_basics.append(detail)
+def check_profile_details(section_name, section, wanted_list, not_wanted_list):
+    section = section.split(', ')
+    print(section)
+    matched_wanted_list = []
+    matched_unwanted_list = []
+    for detail in section:
+        if detail.strip() in wanted_list:
+            matched_wanted_list.append(detail)
+        if detail.strip() in not_wanted_list:
+            matched_unwanted_list.append(detail)
 
-    if matched_wanted_basics:
-        print('[+] Matched Wanted basics: {}'.format(', '.join(
-            matched_wanted_basics)))
-    if matched_unwanted_basics:
-        print('    [-] Matched Unwanted basics: {}'.format(', '.join(
-            matched_unwanted_basics)))
-
-
-def check_background(bkground, bkground_wanted, bkground_not_wanted):
-    bkground = bkground.split(', ')
-    matched_wanted_bkground = []
-    matched_unwanted_bkground = []
-    for detail in bkground:
-        if detail.strip() in bkground_wanted:
-            matched_wanted_bkground.append(detail)
-        if detail.strip() in bkground_not_wanted:
-            matched_unwanted_bkground.append(detail)
-
-    if matched_wanted_bkground:
-        print('[+] Matched Wanted background: {}'.format(', '.join(
-            matched_wanted_bkground)))
-    if matched_unwanted_bkground:
-        print('    [-] Matched Unwanted background: {}'.format(', '.join(
-            matched_unwanted_bkground)))
-
-
-def check_misc_details(misc_details, misc_details_wanted,
-                       misc_details_not_wanted):
-    misc_details = misc_details.split(', ')
-    matched_wanted_misc_details = []
-    matched_unwanted_misc_details = []
-    for detail in misc_details:
-        if detail.strip() in misc_details_wanted:
-            matched_wanted_misc_details.append(detail)
-        if detail.strip() in misc_details_not_wanted:
-            matched_unwanted_misc_details.append(detail)
-
-    if matched_wanted_misc_details:
-        print('[+] Matched Wanted Misc Details: {}'.format(', '.join(
-            matched_wanted_misc_details)))
-    if matched_unwanted_misc_details:
-        print('    [-] Matched Unwanted Misc Details: {}'.format(', '.join(
-            matched_unwanted_misc_details)))
+    if matched_wanted_list:
+        print('[+] Matched Wanted {}: {}'.format(section_name, ', '.join(
+            matched_wanted_list)))
+    if matched_unwanted_list:
+        print('    [-] Matched Unwanted {}: {}'.format(section_name, ', '.join(
+            matched_unwanted_list)))
 
 
 def check_essays(essays):
